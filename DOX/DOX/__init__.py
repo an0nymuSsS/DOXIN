@@ -1,22 +1,23 @@
 import webbrowser
 import time
+from pynput.keyboard import Key, Controller
 print("|---------------------------------------------------------------- |")
 time.sleep(0.2)
-print("|DDDDDDDDDDD     |      OOOOOO      |   XXXX             XXXX     |")
+print("|DDDDDDDDDDD     |      OOOOOO      |   XXXX                 XXXX |")
 time.sleep(0.2)
-print("|DD    DDDDDDD   |    OO0    O00    |    XXXX          XXXX       |")
+print("|DD  DDDDDDDDD   |    OO0    O00    |    XXXX             XXXX    |")
 time.sleep(0.2)
-print("|DD         DDD  |   000       000  |       XXXX       XXXX       |")
+print("|DD         DDD  |   000       000  |       XXXX        XXXX      |")
 time.sleep(0.2)
 print("|DD         DDD  |   000       000  |         XXXX    XXXX        |")
 time.sleep(0.2)
-print("|DD         DDD  |   000       000  |              XXXX           |")
+print("|DD         DDD  |   000       000  |             XXXX            |")
 time.sleep(0.2)
-print("|DD         DDD  |    000       000 |          XXXX     XXXX      |")
+print("|DD         DDD  |    000       000 |          XXXX   XXXX        |")
 time.sleep(0.4)
 print("|DD         DDD  |    000       000 |       XXXX         XXXX     |")
 time.sleep(0.4)
-print("|DD      DDDDDD  |     0000   0000  |    XXXX             XXXX    |")
+print("|DD   DDDDDDDDD  |     0000   0000  |    XXXX             XXXX    |")
 time.sleep(0.4)
 print("|DDDDDDDDDDDD    |       0000000    | XXXX                 XXXX   |")
 time.sleep(0.4)
@@ -28,7 +29,7 @@ print("|-----------------------------------------------------------------|")
 time.sleep(1)
 def main():
 
-    Num = input("|    Press 1 for name    |    Press 2 for Number    |    3 for ip tracer   |    Press 4 for discord link    |    5 Settings    |    6 exit    |\n")
+    Num = input("|    Press 1 for name    |    Press 2 for Number    |    3 for ip tracer   |    \n|    Press 4 for discord link    |    5 Settings    |    6 exit    |\n|    7 Spam key key    |\n")
 
     if Num == "1":
         Name = input("Enter name\n")
@@ -45,8 +46,8 @@ def main():
         webbrowser.get('chrome').open_new_tab(url2)
         webbrowser.get('chrome').open_new_tab(url3)
         webbrowser.get('chrome').open_new_tab(url4)
-        log = input("Do you want to save logs?\n")
-        if log == "y":
+        log = input("Do you want to save logs?\n").lower()
+        if log == "y".lower():
             log = open('Log.txt', 'w')
             log.write('\nUser Name = ' + Name)
             log.write('\nUser Surname = ' + Surname)
@@ -91,22 +92,22 @@ def main():
 
 
     if Num == "3":
-        ip = input("Enter ip")
+        ip = input("Enter ip\n")
         url1 = 'ip-tracker.org/locator/ip-lookup.php?ip=' + ip
         chrome_path = r'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
         webbrowser.register('chrome', None, webbrowser.BackgroundBrowser(chrome_path))
         webbrowser.get('chrome').open_new_tab(url1)
-        log = input("Do you want to save logs?\n")
-        if log == "y":
+        log = input("Do you want to save logs?\n").lower()
+        if log == "y".lower():
             log = open('Log.txt', 'w')
             log.write('User info = ' + ip)
-            restart = input("Press y to restart\n")
-            if restart == "y":
+            restart = input("Press y to restart\n").lower()
+            if restart == "y".lower():
                 main()
 
         if log == "n":
-            restart = input("Press y to restart\n")
-            if restart == "y":
+            restart = input("Press y to restart\n").lower()
+            if restart == "y".lower():
                 main()
 
     if Num == "4":
@@ -115,8 +116,8 @@ def main():
         if log == "y":
             log = open('Log.txt', 'w')
             log.write('User info = ' + Disord)
-            restart = input("Press y to restart\n")
-            if restart == "y":
+            restart = input("Press y to restart\n").lower()
+            if restart == "y".lower():
                 main()
 
         if log == "n":
@@ -136,4 +137,22 @@ def main():
 
     if Num == "6":
         quit()
+
+    if Num == "7":
+        keyboard = Controller()
+        type = input("Type text you want to spam")
+        url1 = 'www.omegle.com/'
+        chrome_path = r'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
+        webbrowser.register('chrome', None, webbrowser.BackgroundBrowser(chrome_path))
+        webbrowser.get('chrome').open_new_tab(url1)
+        start = input("Press y to spam.").lower()
+        if start == "y".lower():
+            time.sleep(5)
+            keyboard.type(type)
+            keyboard.press(Key.enter)
+            keyboard.release(Key.enter)
+
+        else:
+            main()
+
 main()
